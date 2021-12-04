@@ -23,7 +23,8 @@ public class Service {
 
     public void saveUtilizator(String firstName, String lastName) {
         Utilizator utilizator = new Utilizator(firstName, lastName);
-        this.repository.save(utilizator);
+        Utilizator afterSave = this.repository.save(utilizator);
+        utilizator.setId(afterSave.getId());
         this.repoUtilizator.save(utilizator);
     }
 
@@ -57,12 +58,16 @@ public class Service {
                     if (Objects.equals(user.getId(), id1)) {
                         ok = false;
                         break;
-                    }.
+                    }
                 }
                 if (ok) {
                     utilizator1.makeFriend(utilizator2);
                     utilizator2.makeFriend(utilizator1);
                     this.repository.saveFriendsToFile();
+
+                    Prietenie prietenie = new Prietenie(id1,id2);
+                    prietenie.setId(id);
+                    this.repoPrietenie.save(prietenie);
                 }
             }
         } catch (NullPointerException e) {

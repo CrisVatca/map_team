@@ -2,6 +2,8 @@ package repository.file;
 
 import domain.Entity;
 import domain.validators.Validator;
+import repository.db.PrietenieDbRepository;
+import repository.db.UtilizatorDbRepository;
 import repository.memory.InMemoryRepository;
 
 import java.io.*;
@@ -67,10 +69,8 @@ public abstract class AbstractFileRepository<ID, E extends Entity<ID>> extends I
     @Override
     public E save(E entity){
         E e = super.save(entity);
-        if(e == null){
-            writeToFile(entity);
-            writeToFriendshipFile(entity);
-        }
+        writeToFile(entity);
+        writeToFriendshipFile(entity);
         return e;
     }
 

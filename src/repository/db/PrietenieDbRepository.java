@@ -28,7 +28,7 @@ public class PrietenieDbRepository implements Repository<Long, Prietenie> {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, id.toString());
+            ps.setLong(1, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -62,13 +62,14 @@ public class PrietenieDbRepository implements Repository<Long, Prietenie> {
     @Override
     public Prietenie save(Prietenie entity) {
 
-        String sql = "insert into prietenie (idu, idp) values (?,?)";
+        String sql = "insert into prietenie (idu, idp,id) values (?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setString(1, entity.getIdU().toString());
-            ps.setString(2, entity.getIdP().toString());
+            ps.setLong(1, entity.getIdU());
+            ps.setLong(2, entity.getIdP());
+            ps.setLong(3, entity.getId());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -83,7 +84,7 @@ public class PrietenieDbRepository implements Repository<Long, Prietenie> {
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql))
         {
-            ps.setString(1, id.toString());
+            ps.setLong(1, id);
 
             ps.executeUpdate();
         } catch (SQLException e) {

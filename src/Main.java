@@ -1,6 +1,8 @@
 import domain.Utilizator;
 import domain.validators.UtilizatorValidator;
 import repository.Repository;
+import repository.db.PrietenieDbRepository;
+import repository.db.UtilizatorDbRepository;
 import repository.file.AbstractFileRepository;
 import repository.file.UtilizatorFile;
 import service.Service;
@@ -22,7 +24,10 @@ public class Main {
         //repo.save(u);
 
         AbstractFileRepository<Long, Utilizator> repoFile = new UtilizatorFile("data/users.csv", "data/prietenie.csv", new UtilizatorValidator());
-        Service service = new Service(repoFile);
+        UtilizatorValidator validator = new UtilizatorValidator();
+        UtilizatorDbRepository repoUtilizator = new UtilizatorDbRepository("jdbc:postgresql://localhost:5432/db","postgres","compunere",validator);
+        PrietenieDbRepository repoPrietenie = new PrietenieDbRepository("jdbc:postgresql://localhost:5432/db","postgres","compunere");
+        Service service = new Service(repoFile,repoPrietenie,repoUtilizator);
         UI ui = new UI(service);
         ui.menu();
     }

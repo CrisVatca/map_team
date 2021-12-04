@@ -30,7 +30,9 @@ public class UI {
             Long id1 = sc.nextLong();
             System.out.println("Dati id-ul celui de al doilea utilizator: ");
             Long id2 = sc.nextLong();
-            this.service.addFriend(id1, id2);
+            System.out.println("Dati id-ul prieteniei: ");
+            Long id = sc.nextLong();
+            this.service.addFriend(id1, id2,id);
             System.out.println("Prietenia a fost creata!");
         } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println(e.getMessage());
@@ -46,7 +48,9 @@ public class UI {
             Long id1 = sc.nextLong();
             System.out.println("Dati id-ul celui de al doilea utilizator: ");
             Long id2 = sc.nextLong();
-            this.service.deleteFriend(id1, id2);
+            System.out.println("Dati id-ul prieteniei: ");
+            Long id = sc.nextLong();
+            this.service.deleteFriend(id1, id2,id);
             System.out.println("Prietenia a fost stearsa!");
         } catch (IllegalArgumentException | NullPointerException e) {
             System.out.println(e.getMessage());
