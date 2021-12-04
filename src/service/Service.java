@@ -41,7 +41,7 @@ public class Service {
         return this.repository.findAll();
     }
 
-    public void addFriend(Long id1, Long id2) {
+    public void addFriend(Long id1, Long id2, Long id) {
         try {
             boolean ok = true;
             if (!Objects.equals(id1, id2)) {
@@ -57,7 +57,7 @@ public class Service {
                     if (Objects.equals(user.getId(), id1)) {
                         ok = false;
                         break;
-                    }
+                    }.
                 }
                 if (ok) {
                     utilizator1.makeFriend(utilizator2);
@@ -70,12 +70,13 @@ public class Service {
         }
     }
 
-    public void deleteFriend(Long id1, Long id2) {
+    public void deleteFriend(Long id1, Long id2, Long id) {
         Utilizator utilizator1 = this.repository.findOne(id1);
         Utilizator utilizator2 = this.repository.findOne(id2);
         this.repository.deleteOneFriend(id2, utilizator1);
         this.repository.deleteOneFriend(id1, utilizator2);
         this.repository.saveFriendsToFile();
+        this.repoPrietenie.delete(id);
     }
 
     public int getNrOfConnectedComponents() {
